@@ -1,0 +1,26 @@
+Enter new patient information
+<hr>
+<%= form_for @patient do |f| %>
+<table width="0%" border="0">
+  <tr>
+    <td><%= f.label(:firstname, "Firstname: ") %></td>
+    <td><%= f.text_field :firstname %></td>
+  </tr>
+  <tr>
+    <td><%= f.label(:lastname, "Lastname: ") %></td>
+    <td><%= f.text_field :lastname %></td>
+  </tr>
+  <tr>
+    <td><%= f.label(:phone, "Phone: ") %></td>
+    <td><%= f.text_field :phone %></td>
+  </tr>
+  <tr>
+    <td><%= f.label(:address, "Address: ") %></td>
+    <td><%= f.text_field :address %></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><%= f.submit%></td>
+  </tr>
+</table>	
+<% end %>

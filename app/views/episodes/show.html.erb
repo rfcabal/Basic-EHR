@@ -1,0 +1,58 @@
+<h2>Episode Options</h2>
+<%= link_to "Log Out", logout_path %><br />
+<%= link_to "Create New Medical History", '/medical_history/new' %>
+<%= link_to "Edit Episode", edit_episode_path %>
+<%= link_to "Delete Episode", @episode, :confirm => "Are you sure?", :method => :delete %>
+<%= link_to_function "Back", "history.back()" %>
+<hr>
+<h2>Episode Information</h2>
+<%= @episode.id %><br />
+<%= @episode.patient.firstname %><br />
+<%= @episode.patient.lastname %><br />
+<%= @episode.created_at.strftime("%d/%m/%Y") %><br />
+<%= @episode.episode_type.name %><br />
+<%  @medical_histories=@episode.medical_histories %>
+<% @diagnosis_episode=@episode.episode_diagnoses %>
+<h2>Episode Diagnoses</h2>
+<table width="0%" border="0">
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Diagnosis</th>
+    <th scope="col">Type</th>
+    <th scope="col">Date</th>
+  </tr>
+<% if !@diagnosis_episode.blank? %>
+<% for item in @diagnosis_episode %>
+  <tr>
+    <td><%= item.id %></td>
+    <td><%= item.diagnosis.name %></td>
+    <td><%= item.diagnosis_type.name %></td>
+    <td><%= link_to item.medical_history.created_at.strftime("%d/%m/%Y"), medical_history_path(item.medical_history.id) %></td>
+  </tr>
+  <% end %>
+<% else %>
+  <h4>This patient doesn't have diagnoses</h4>
+<% end %>
+</table>
+<h4>Medical History Information</h4>
+<table width="0%" border="0">
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Date</th>
+    <th scope="col">Time</th>
+    <th scope="col">Diagnosis</th>
+    <th scope="col">Professional</th>
+    <th scope="col">Department</th>    
+  </tr>
+  <% if !@medical_histories.blank? %>
+  <% for item in @medical_histories %>
+  <tr>
+    <td><%= link_to item.id, medical_history_path(item) %></td>
+    <td><%= item.created_at.strftime("%d/%m/%Y") %></td>
+    <td><%= item.created_at.strftime("%H:%m") %></td>
+    <td><%= item.episode_diagnosis.diagnosis.name %></td>
+    <td><%= item.professional.first_name %></td>
+    <td><%= item.department.name %></td>   
+  <% end %>
+<% else %>
+<% end %>

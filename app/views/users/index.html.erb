@@ -1,0 +1,38 @@
+<h2>Users Search</h2>
+<%= link_to "Log Out", logout_path %><br />
+<%= link_to "Create a User", '/register' %>
+<%= link_to_function "Back", "history.back()" %>
+<hr>
+Display all users' information<br />
+<%= form_tag users_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :first_name => nil %>
+  </p>
+<% end %>
+
+<table width="0%" border="0">
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Firstname</th>
+    <th scope="col">Lastname</th>
+    <th scope="col">Email</th>
+    <th scope="col">National ID</th>
+    <th scope="col">Professional Type</th>
+    <th scope="col">Department</th>
+  </tr>
+  <% if !@users.blank? %>
+  <% for item in @users %>
+  <tr>
+    <td><%= link_to item.id, user_path(item) %></td>
+    <td><%= item.first_name %></td>
+    <td><%= item.last_name %></td>
+    <td><%= item.email %></td>
+    <td><%= item.professional.nid %></td>
+    <td><%= item.professional.professional_type.name %></td>
+    <td><%= item.professional.department.name %></td>
+  </tr>
+  <% end %>
+<% else %>
+<% end %>
+</table>

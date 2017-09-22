@@ -1,0 +1,33 @@
+<h2>Patients Search</h2>
+<%= link_to "Log Out", logout_path %><br />
+<%= link_to "Create New Patient", '/patients/new' %>
+<%= link_to_function "Back", "history.back()" %>
+<hr>
+Display all patients' information<br />
+<%= form_tag patients_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :firstname => nil %>
+  </p>
+<% end %>
+<table width="0%" border="0">
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Firstname</th>
+    <th scope="col">Lastname</th>
+    <th scope="col">Phone</th>
+    <th scope="col">Address</th>
+  </tr>
+  <% if !@patients.blank? %>
+  <% for item in @patients %>
+  <tr>
+    <td><%= link_to item.id, patient_path(item) %></td>
+    <td><%= item.firstname %></td>
+    <td><%= item.lastname %></td>
+    <td><%= item.phone %></td>
+    <td><%= item.address %></td>
+  </tr>
+  <% end %>
+<% else %>
+<% end %>
+</table>

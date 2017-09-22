@@ -1,0 +1,13 @@
+<h2>Medical History Options</h2>
+<%= link_to "Log Out", logout_path %><br />
+<%= link_to "Create New Medical History", '/medical_history/new' %>
+<%= link_to "Edit Medical History", edit_medical_history_path %>
+<%= link_to "Delete Medical History", @medical_history, :confirm => "Are you sure?", :method => :delete %>
+<%= link_to_function "Back", "history.back()" %>
+<hr>
+<h2>Medical History Information</h2>
+<%= @medical_history.id %><br />
+<h4>Profesional Information</h4>
+<%= @medical_history.professional.first_name %> <%= @medical_history.professional.last_name %><br />
+<h4>Patient Information Information</h4>
+<%= @medical_history.episode.patient.firstname %> <%= @medical_history.episode.patient.lastname %><br />

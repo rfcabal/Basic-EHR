@@ -1,0 +1,23 @@
+<h2>Edit Patient</h2>
+
+<%= form_for @patient do |f| %>
+	<P>
+		<%= f.label :firstname %><br />
+		<%= f.text_field :firstname %>
+	</P>
+	<P>
+		<%= f.label :lastname %><br />
+		<%= f.text_field :lastname %>
+	</P>
+	<P>
+		<%= f.label :phone %><br />
+		<%= f.text_field :phone %>
+	</P>
+	<P>
+		<%= f.label :address %><br />
+		<%= f.text_field :address %>
+	</P>
+	<P>
+		<%= f.submit "Update Patient" %>
+	</P>
+<% end %>

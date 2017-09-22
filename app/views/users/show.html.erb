@@ -1,0 +1,19 @@
+<h2>User Options</h2>
+<%= link_to "Log Out", logout_path %><br />
+<%= link_to "Create New User", '/register' %>
+<%= link_to "Edit User", edit_user_path %>
+<%= link_to "Delete User", @user, :confirm => "Are you sure?", :method => :delete %>
+<%= link_to_function "Back", "history.back()" %>
+<hr>
+<h2>User Information</h2>
+<%= @user.id %><br />
+<%= @user.professional.first_name %><br />
+<%= @user.professional.last_name %><br />
+<%= @user.professional.professional_type.name %><br />
+<%= @user.professional.professional_specialty.name %><br />
+<%= @user.professional.department.name %><br />
+
+<p>
+<%= link_to "Edit", edit_user_path %> | 
+<%= link_to "Delete", @user, :confirm => "Are you sure?", :method => :delete %>
+</p>

@@ -1,0 +1,57 @@
+<h2>Patient Dashboard</h2>
+<%= link_to "Log Out", logout_path %><br />
+<%= link_to "Create New Episode", '/episode/new' %>
+<%= link_to "Edit Patient", edit_patient_path %>
+<%= link_to "Delete Patient", @patient, :confirm => "Are you sure?", :method => :delete %>
+<%= link_to_function "Back", "history.back()" %>
+<hr>
+<h2>Patient Information</h2>
+<%= @patient.firstname %><br />
+<%= @patient.lastname %><br />
+<%= @patient.phone %><br />
+<h2>Diagnoses</h2>
+<% @diagnosis_patient = @patient.episode_diagnoses %><br />
+<table width="0%" border="0">
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Diagnosis</th>
+    <th scope="col">Type</th>
+    <th scope="col">Episode Date</th>
+  </tr>
+<% if !@diagnosis_patient.blank? %>
+<% for item in @diagnosis_patient %>
+  <tr>
+    <td><%= item.id %></td>
+    <td><%= item.diagnosis.name %></td>
+    <td><%= item.diagnosis_type.name %></td>
+    <td><%= link_to item.episode.created_at.strftime("%d/%m/%Y"), episode_path(item.episode.id) %></td>
+  </tr>
+  <% end %>
+<% else %>
+  <h4>This patient doesn't have diagnoses</h4>
+<% end %>
+</table>
+<h2>Episodes</h2>
+<% @episodes = @patient.episodes %><br />
+<table width="0%" border="0">
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Date</th>
+    <th scope="col">Time</th>
+    <th scope="col">Type</th>
+  </tr>
+<% if !@episodes.blank? %>
+<% for item in @episodes %>
+  <tr>
+    <td><%= link_to item.id, episode_path(item) %></td>
+    <% @t = item.created_at %>
+    <td><%= @t.strftime("%d/%m/%Y") %></td>
+    <td><%= @t.strftime("%H:%m") %></td>
+    <td><%= item.episode_type.name %></td>
+  </tr>
+  <% end %>
+<% else %>
+	<h4>This patient doesn't have episodes</h4>
+<% end %>
+</table>
+<br />

@@ -1,0 +1,10 @@
+<h2>Edit Episode</h2>
+
+<%= form_for @episode do |f| %>
+	<P>
+		<%= f.label :id %><br />
+		<%= f.text_field :id %>
+	</P>
+		<%= f.submit "Update Episode" %>
+	</P>
+<% end %>
